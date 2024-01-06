@@ -1,0 +1,18 @@
+[Unit]
+Description=Simple Chicken Houase Sensor Script
+After=syslog.target
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/chickenhouse
+ExecStart=/usr/bin/env python3 /home/pi/chickenhouse/chickenhouse.py
+SyslogIdentifier=chickenhouse
+StandardOutput=syslog
+StandardError=syslog
+Restart=always
+RestartSec=15
+
+[Install]
+WantedBy=multi-user.target
