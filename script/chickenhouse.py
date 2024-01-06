@@ -11,7 +11,7 @@ from sht_sensor import Sht
 from w1thermsensor import W1ThermSensor, Unit
 
 # define mqtt_prefix
-mqtt_prefix = "chickenhome"
+mqtt_prefix = "chickenhouse"
 
 # define data
 broker_ip = "localhost"

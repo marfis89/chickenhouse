@@ -17,40 +17,40 @@
 
 ## Parts
 
-To build your own Vibrodoser you will need the following parts. Feel free to use other brands with similar specifications:
+To build your own chicken house control you will need the following parts. Feel free to use other brands with similar specifications:
 
 ### List of electrical parts
 
 - Raspberry pi 3, 4, 5 (price ~50€)
 - [Raspberry Pi 8-ch Relay Expansion Board from waveshare](https://www.waveshare.com/rpi-relay-board-b.htm) (price ~25€)
-- [1kg load cell with a hx711 A/D hx711](https://www.ebay.de/sch/i.html?_from=R40&_trksid=p2553889.m570.l1313&_nkw=hx+711+loadcell&_sacat=0) (price ~5€)
-- [10A Power regulator from kemo](https://www.kemo-electronic.de/en/Transformer-Dimmer/M240-Power-Control-230-V-AC-10-A-Multifunction.php) (price ~50€)
-- [Linear feeder from Afag](https://www.afag.com/en/products/detail/linear-feeder-hlf-m-3.html) (get a used one from ebay ~350€)
-- [5v ~5a DIN rail power supply HDR-60-5](https://www.meanwell-web.com/en-gb/ac-dc-ultra-slim-din-rail-power-supply-input-range-hdr--60--5) (price ~20€)  
+- [Linear motor 12V dc with endstops](https://www.ebay.de/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw=12v+linear+motor+&_sacat=0&_odkw=12v+linear+morot&_osacat=0) (price ~100€)
 - [13a fuse 1p+N, C-13A](https://www.hager.at/produktkatalog/energieverteilung-und-schutz-schaltgeraete/reiheneinbaugeraete/leitungsschutzschalter/ls-schalter-6ka/mcn513/19391.htm) (price 15€)
-- 600mm x 400mm x 200mm control cabinet (price ~80€)
-- stuff like cabels, DIN-Rail, wire ducts etc. (price ~50€)
-
-### List of 3D models and mechanical parts
-
-- 10m 40mmx40mm steel pipes (price ~200€)
-- 5mm steel plate (price ~200€)
-  - 2x 600mmx 800mm
-  - 1x 280mm x 600mm  
-
-optional for wlan / lan connection of the raspberry (You don't have to create a separate network, you can use your normal network too):
-
-- a cheap wlan router (mostly they have 12v input voltage, choose a power supply that fits the router)  
 - [12v ~5a DIN rail power supply HDR-60-12](https://www.meanwell-web.com/en-gb/ac-dc-ultra-slim-din-rail-power-supply-input-range-hdr--60--12) (price ~20€)  
+- [5v ~5a DIN rail power supply HDR-60-5](https://www.meanwell-web.com/en-gb/ac-dc-ultra-slim-din-rail-power-supply-input-range-hdr--60--5) (price ~20€)  
+- 600mm x 400mm x 200mm control cabinet (price ~80€)
+- stuff like cabels, DIN-Rail, wire ducts etc. (price ~50€)  
+
+optional sensors:
+
+- 1x [Temperature/Moisture Sensor](https://blog.adafruit.com/2013/03/14/new-product-soil-temperaturemoisture-sensor-sht10/) 
+
+or
+
+- 1x [Temperature Sensor](https://www.ebay.de/sch/i.html?_from=R40&_trksid=p2332490.m570.l1313&_nkw=ds18b20&_sacat=0)  
+
+optional webcam:
+
+- 1x [Full HD webcam](https://www.ebay.de/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw=webcam&_sacat=0&_odkw=ds18b20&_osacat=0)
 
 ## Hardware-Setup
 
+Just connect the linear dc motor to the flap door of your chicken home. For safety reasons you can use a rope between the motor and the door. If a chicken falls and gets stuck while closing, it will not be crushed by the force of the motor. Mount the lamps and infrared lamps.  
 
 ## Electrical-Setup
 
 WARNING electrical installation are dangerous. If you don't know how to handel this task, ask a professional to do the job for you ! Liability for damages is excluded !
 
-Make three inputs for phase, neutral and earth. Place the 13a input fuse (1p+N) onto the DIN rail and hook phase, neutral to it. Then make a connection from the fuse to the power supplies. 
+Make three inputs for phase, neutral and earth. Place the 13a input fuse (1p+N) onto the DIN rail and hook phase, neutral to it. Then make a connection from the fuse to the power supply. Power the pi or the board with 5v and GND from the power supply. Also wire the phase to relay 1 - 5 of the raspberry relay board. Use the NC connection of the relays, so the power is normally cut off. Wire the output of relay 1 to the 12v power supply. Wire the output of relay 2-5 to the separate terminal block, for switching light and heater. Connect the 12V output of the power supply to relay 7 and 8. Check [invertDc](./docs/invertdc.jpg) to see how to invert the rotation of the linear dc motor (USE RELAY 7 and 8).
 
 ### Wiring diagrams and schematics of the control cabinet
 
@@ -64,15 +64,15 @@ Try to use a good quality usb stick, instead of a simple sd card. There's a lot 
 
 #### Steps to set up Raspberry Pi
 
-1. Create a directory with ```mkdir /home/pi/vibrodoser```  
-2. Copy [hx7111](hx711/hx711.py) and [vibrodoser.py](./hx711/vibroDoser.py) to the pi /home/pi/vibrodoser/
-3. Make vibrodoser.py executable ```chmod +x /home/pi/vibroDoser/vibroDoser.py```  
-4. Add the content of the [vibrodoser.service](./service/vibrodoser.service) file to /etc/systemd/system/vibrodoser.service
-5. Enable the service with ```sudo systemctl enable vibroDoser.service```
-6. Start the service with ```sudo systemctl start vibroDoser.service```
-7. Check the service with ```sudo systemctl status vibroDoser.service```
+1. Create a directory with ```mkdir /home/pi/chickenhouse```  
+2. Copy [chickenhouse.py](./script/chickenhouse.py) to the pi /home/pi/chickenhouse/
+3. Make chickenhouse.py executable ```chmod +x /home/pi/chickenhouse/chickenhouse.py```  
+4. Create the file and copy the content of the [chickenhouse.service](./service/chickenhouse.service) with ```sudo nano /etc/systemd/system/chickenhouse.service```  
+5. Enable the service with ```sudo systemctl enable chickenhouse.service```
+6. Start the service with ```sudo systemctl start chickenhouse.service```
+7. Check the service with ```sudo systemctl status chickenhouse.service```
 
-The service execute the vibroDoser.py script on boot and take care of a reboot is necessary.
+The service execute the chickenhouse.py script on boot and take care if a reboot is necessary.
 
 #### Installation of Node-RED and necessary packages
 
@@ -82,10 +82,17 @@ The service execute the vibroDoser.py script on boot and take care of a reboot i
 sudo apt-get update && sudo apt-get upgrade && \
 bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered) && \
 sudo systemctl enable nodered.service && \
-sudo reboot
+sudo systemctl start nodered.service 
 ```
 
-When browsing from another machine you should use the hostname or IP-address of the Pi: http://<hostname>:1880. You can find the IP address by running hostname -I on the Pi.  
+#### Hostname
+
+When browsing from another machine you should use the hostname or IP-address of the Pi: ```http://<hostname>:1880```
+
+Set a custom hostname to reach the pi without the ip address ```sudo hostname -b chickenhouse```  
+Now reboot the pi and check the hostname with the ```hostname``` command. Now you can use [http://chickenhouse.local:1880](http://chickenhouse.local:1880) to reach noderred from your local network.
+
+#### Installation of Node-RED packages  
 
 Now install the following pallets for nodered dashboard and mqtt broker
 
@@ -96,10 +103,11 @@ Now import the [flow](./flow/flow.json) to nodered. See this instructions [Impor
 
 #### Node-RED Flow
 
-The flow provides a mqqt broker to communication with the scale service. The flow listening on ```vibroDoser/scale/load``` and sending the tare command on ```vibroDoser/scale/tare``` to the scale. While there is active, all measurements from the scale are blocked.
+The flow provides a mqqt broker to communication with the chicken house service. The flow listening on ```chickenhouse/temperature``` and ```chickenhouse/humidity``` to receive the temperature and humidity from the sersors. The flow also listen to ```chickenhome/img``` to receive the webcam image, while the ui is active. To activate the "stream" the flow request a image from the script by posting on ```chickenhome/sendImg```.
 
 ## Usage Guide
 
+Set the timer for the flap door and the lamps.  
 
 ## License  
 
