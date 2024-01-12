@@ -37,12 +37,13 @@
     {
         "id": "284c6a43.d3dc96",
         "type": "ui_group",
-        "name": "Schalter",
+        "name": "Door",
         "tab": "406af151.81a3b",
         "order": 2,
         "disp": true,
         "width": "7",
-        "collapse": false
+        "collapse": false,
+        "className": ""
     },
     {
         "id": "44754402.e37c1c",
@@ -171,6 +172,37 @@
         }
     },
     {
+        "id": "5fba290bb5afdf68",
+        "type": "ui_spacer",
+        "z": "945820fc.c8cba",
+        "name": "spacer",
+        "group": "284c6a43.d3dc96",
+        "order": 3,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "d71c159adbdec0d9",
+        "type": "ui_spacer",
+        "z": "945820fc.c8cba",
+        "name": "spacer",
+        "group": "284c6a43.d3dc96",
+        "order": 5,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "d973baea5b094391",
+        "type": "ui_group",
+        "name": "Light",
+        "tab": "406af151.81a3b",
+        "order": 3,
+        "disp": true,
+        "width": "7",
+        "collapse": false,
+        "className": ""
+    },
+    {
         "id": "1754fa87.e67e75",
         "type": "mqtt in",
         "z": "945820fc.c8cba",
@@ -189,7 +221,8 @@
                 "ea970ef6.b40c7",
                 "ef6a4e3c.2730c",
                 "65ad7a57f1387ecc",
-                "05280e478c9f3f6f"
+                "05280e478c9f3f6f",
+                "696dcebc855e69eb"
             ]
         ]
     },
@@ -225,8 +258,8 @@
         "nl": false,
         "rap": false,
         "inputs": 0,
-        "x": 120,
-        "y": 880,
+        "x": 140,
+        "y": 1280,
         "wires": [
             [
                 "eeaf5acf.062fa8"
@@ -244,8 +277,8 @@
         "syntax": "mustache",
         "template": "<img height=\"auto\" max-width=\"100%\" width=\"640px\" height=\"360px\" src=\"{{{payload}}}\">",
         "output": "str",
-        "x": 360,
-        "y": 880,
+        "x": 380,
+        "y": 1280,
         "wires": [
             [
                 "e1135e24.ff542"
@@ -258,8 +291,8 @@
         "z": "945820fc.c8cba",
         "name": "Img Section",
         "info": "",
-        "x": 110,
-        "y": 820,
+        "x": 130,
+        "y": 1220,
         "wires": []
     },
     {
@@ -279,7 +312,7 @@
         "name": "Door Section",
         "info": "",
         "x": 110,
-        "y": 440,
+        "y": 540,
         "wires": []
     },
     {
@@ -296,8 +329,8 @@
         "correl": "",
         "expiry": "",
         "broker": "a74ae31e.a4269",
-        "x": 600,
-        "y": 960,
+        "x": 620,
+        "y": 1360,
         "wires": []
     },
     {
@@ -311,30 +344,11 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 360,
-        "y": 960,
+        "x": 380,
+        "y": 1360,
         "wires": [
             [
                 "9e0b9ad4.2f1568"
-            ]
-        ]
-    },
-    {
-        "id": "d091db97.d65218",
-        "type": "function",
-        "z": "945820fc.c8cba",
-        "name": "",
-        "func": "var payload=msg.payload;\n\n\nif (payload == 1){\n    msg.payload = true\n    \n}\n\nif (payload == 0){\n    msg.payload = false\n    \n}    \n\nreturn msg;\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 360,
-        "y": 540,
-        "wires": [
-            [
-                "e81bdfb4.81ade"
             ]
         ]
     },
@@ -344,15 +358,15 @@
         "z": "945820fc.c8cba",
         "name": "on = open / off = close",
         "info": "",
-        "x": 520,
-        "y": 440,
+        "x": 860,
+        "y": 560,
         "wires": []
     },
     {
         "id": "8f518c02.5701c",
         "type": "inject",
         "z": "945820fc.c8cba",
-        "name": "Klappe zu",
+        "name": "door close",
         "props": [
             {
                 "p": "payload"
@@ -369,8 +383,8 @@
         "topic": "",
         "payload": "false",
         "payloadType": "bool",
-        "x": 720,
-        "y": 480,
+        "x": 540,
+        "y": 540,
         "wires": [
             [
                 "782ce215.d37b7c"
@@ -381,15 +395,15 @@
         "id": "ff9c986a.f2fca8",
         "type": "function",
         "z": "945820fc.c8cba",
-        "name": "",
-        "func": "var payload=msg.payload;\n\n\nif (payload == true){\n    msg.payload = \"offen\"\n    \n}\n\nif (payload == false){\n    msg.payload = \"geschlossen\"\n    \n}    \n\nreturn msg;\n",
+        "name": "set text inject",
+        "func": "var payload=msg.payload;\n\n\nif (payload == true){\n    msg.payload = \"open\"\n    \n}\n\nif (payload == false){\n    msg.payload = \"closed\"\n    \n}    \n\nreturn msg;\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1140,
+        "x": 1190,
         "y": 640,
         "wires": [
             [
@@ -401,7 +415,7 @@
         "id": "9b2f56d5.cb95d8",
         "type": "inject",
         "z": "945820fc.c8cba",
-        "name": "Klappe auf",
+        "name": "door open",
         "props": [
             {
                 "p": "payload"
@@ -418,8 +432,8 @@
         "topic": "",
         "payload": "true",
         "payloadType": "bool",
-        "x": 720,
-        "y": 420,
+        "x": 540,
+        "y": 500,
         "wires": [
             [
                 "782ce215.d37b7c"
@@ -439,7 +453,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 730,
-        "y": 100,
+        "y": 140,
         "wires": []
     },
     {
@@ -457,8 +471,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 650,
-        "y": 540,
+        "x": 590,
+        "y": 600,
         "wires": [
             [
                 "782ce215.d37b7c"
@@ -485,7 +499,7 @@
         "to": "",
         "reg": false,
         "x": 630,
-        "y": 720,
+        "y": 1120,
         "wires": [
             []
         ]
@@ -511,8 +525,8 @@
         "topic": "",
         "payload": "true",
         "payloadType": "bool",
-        "x": 110,
-        "y": 720,
+        "x": 130,
+        "y": 1120,
         "wires": [
             [
                 "9a913208.0b774"
@@ -533,7 +547,7 @@
         "repeat": false,
         "again": false,
         "x": 370,
-        "y": 100,
+        "y": 140,
         "wires": [
             [
                 "a90a87a3.3e62f8"
@@ -541,145 +555,11 @@
         ]
     },
     {
-        "id": "2d592b66.efb0a4",
-        "type": "bigtimer",
-        "z": "945820fc.c8cba",
-        "outtopic": "",
-        "outpayload1": "",
-        "outpayload2": "",
-        "name": "Door Timer",
-        "comment": "",
-        "lat": "46.539750",
-        "lon": "14.052127",
-        "starttime": "480",
-        "endtime": "1260",
-        "starttime2": "0",
-        "endtime2": "0",
-        "startoff": 0,
-        "endoff": "45",
-        "startoff2": 0,
-        "endoff2": 0,
-        "offs": 0,
-        "outtext1": "",
-        "outtext2": "",
-        "timeout": 1440,
-        "sun": true,
-        "mon": true,
-        "tue": true,
-        "wed": true,
-        "thu": true,
-        "fri": true,
-        "sat": true,
-        "jan": true,
-        "feb": true,
-        "mar": true,
-        "apr": true,
-        "may": true,
-        "jun": true,
-        "jul": true,
-        "aug": true,
-        "sep": true,
-        "oct": true,
-        "nov": true,
-        "dec": true,
-        "day1": 0,
-        "month1": 0,
-        "day2": 0,
-        "month2": 0,
-        "day3": 0,
-        "month3": 0,
-        "day4": 0,
-        "month4": 0,
-        "day5": 0,
-        "month5": 0,
-        "day6": 0,
-        "month6": 0,
-        "day7": 0,
-        "month7": 0,
-        "day8": 0,
-        "month8": 0,
-        "day9": 0,
-        "month9": 0,
-        "day10": 0,
-        "month10": 0,
-        "day11": 0,
-        "month11": 0,
-        "day12": 0,
-        "month12": 0,
-        "d1": 0,
-        "w1": 0,
-        "d2": 0,
-        "w2": 0,
-        "d3": 0,
-        "w3": 0,
-        "d4": 0,
-        "w4": 0,
-        "d5": 0,
-        "w5": 0,
-        "d6": 0,
-        "w6": 0,
-        "xday1": 0,
-        "xmonth1": 0,
-        "xday2": 0,
-        "xmonth2": 0,
-        "xday3": 0,
-        "xmonth3": 0,
-        "xday4": 0,
-        "xmonth4": 0,
-        "xday5": 0,
-        "xmonth5": 0,
-        "xday6": 0,
-        "xmonth6": 0,
-        "xday7": 0,
-        "xmonth7": 0,
-        "xday8": 0,
-        "xmonth8": 0,
-        "xday9": 0,
-        "xmonth9": 0,
-        "xday10": 0,
-        "xmonth10": 0,
-        "xday11": 0,
-        "xmonth11": 0,
-        "xday12": 0,
-        "xmonth12": 0,
-        "xd1": 0,
-        "xw1": 0,
-        "xd2": 0,
-        "xw2": 0,
-        "xd3": 0,
-        "xw3": 0,
-        "xd4": 0,
-        "xw4": 0,
-        "xd5": 0,
-        "xw5": 0,
-        "xd6": 0,
-        "xw6": 0,
-        "suspend": false,
-        "random": false,
-        "randon1": false,
-        "randoff1": false,
-        "randon2": false,
-        "randoff2": false,
-        "repeat": false,
-        "atstart": true,
-        "odd": false,
-        "even": false,
-        "x": 110,
-        "y": 540,
-        "wires": [
-            [],
-            [
-                "d091db97.d65218"
-            ],
-            []
-        ]
-    },
-    {
         "id": "782ce215.d37b7c",
         "type": "ui_switch",
         "z": "945820fc.c8cba",
-        "name": "Auf/Zu",
-        "label": "Klappe manuell Auf/Zu",
+        "name": "door manually",
+        "label": "Open/Close door manually",
         "tooltip": "",
         "group": "284c6a43.d3dc96",
         "order": 2,
@@ -700,13 +580,12 @@
         "offcolor": "",
         "animate": true,
         "className": "",
-        "x": 890,
-        "y": 540,
+        "x": 840,
+        "y": 600,
         "wires": [
             [
                 "ff9c986a.f2fca8",
-                "c1cee7320295ef00",
-                "e61c534511c171fb"
+                "1ef6cc55daf44ffb"
             ]
         ]
     },
@@ -714,11 +593,11 @@
         "id": "9a913208.0b774",
         "type": "ui_switch",
         "z": "945820fc.c8cba",
-        "name": "Automatik An/Aus",
-        "label": "Automatik",
+        "name": "Automatic On/Off",
+        "label": "Automatic On/Off",
         "tooltip": "",
         "group": "284c6a43.d3dc96",
-        "order": 3,
+        "order": 4,
         "width": 0,
         "height": 0,
         "passthru": true,
@@ -736,8 +615,8 @@
         "offcolor": "",
         "animate": true,
         "className": "",
-        "x": 390,
-        "y": 720,
+        "x": 370,
+        "y": 1120,
         "wires": [
             [
                 "5f5335f9.ec662c"
@@ -773,12 +652,16 @@
         "order": 1,
         "width": 0,
         "height": 0,
-        "name": "Status Klappe ",
-        "label": "Klappe ist aktuell ",
+        "name": "Status Door",
+        "label": "Door status:",
         "format": "{{msg.payload}}",
         "layout": "row-left",
         "className": "",
-        "x": 1420,
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1430,
         "y": 640,
         "wires": []
     },
@@ -797,8 +680,8 @@
         "resendOnRefresh": false,
         "templateScope": "local",
         "className": "",
-        "x": 600,
-        "y": 880,
+        "x": 620,
+        "y": 1280,
         "wires": [
             []
         ]
@@ -807,12 +690,12 @@
         "id": "2c823a65.e4c306",
         "type": "ui_chart",
         "z": "945820fc.c8cba",
-        "name": "humidity-1-chart",
+        "name": "humidity-chart",
         "group": "44754402.e37c1c",
         "order": 3,
         "width": 0,
         "height": 0,
-        "label": "humidity-1-chart",
+        "label": "humidity-chart",
         "chartType": "line",
         "legend": "false",
         "xformat": "HH:mm:ss",
@@ -853,8 +736,8 @@
         "z": "945820fc.c8cba",
         "name": "",
         "events": "all",
-        "x": 100,
-        "y": 960,
+        "x": 120,
+        "y": 1360,
         "wires": [
             [
                 "145ad5ea.d8cb5a"
@@ -865,37 +748,37 @@
         "id": "da983653df518458",
         "type": "rpi-gpio out",
         "z": "945820fc.c8cba",
-        "name": "",
+        "name": "relay 8 door",
         "pin": "21",
         "set": "",
         "level": "0",
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 1380,
-        "y": 480,
+        "x": 1430,
+        "y": 520,
         "wires": []
     },
     {
         "id": "bfcc21472e760a6a",
         "type": "rpi-gpio out",
         "z": "945820fc.c8cba",
-        "name": "",
+        "name": "relay 7 door",
         "pin": "26",
         "set": "",
         "level": "0",
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 1380,
-        "y": 540,
+        "x": 1430,
+        "y": 580,
         "wires": []
     },
     {
         "id": "c1cee7320295ef00",
         "type": "function",
         "z": "945820fc.c8cba",
-        "name": "",
+        "name": "switch polarity ",
         "func": "var payload=msg.payload;\n\nif (payload == true){\n    var msg1 = { payload : true};\n    var msg2 = { payload: false};\n\n    return[msg1,msg2]    \n}\n\nif (payload == false){\n    var msg1 = { payload: false };\n    var msg2 = { payload: true };\n\n    return[msg1,msg2]\n}    \n",
         "outputs": 2,
         "timeout": "",
@@ -903,8 +786,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1140,
-        "y": 540,
+        "x": 1200,
+        "y": 600,
         "wires": [
             [
                 "da983653df518458"
@@ -923,16 +806,16 @@
         "op2": "true",
         "op1type": "bool",
         "op2type": "bool",
-        "duration": "30",
+        "duration": "2",
         "extend": true,
         "overrideDelay": false,
-        "units": "s",
+        "units": "min",
         "reset": "",
         "bytopic": "all",
         "topic": "topic",
         "outputs": 1,
-        "x": 1150,
-        "y": 420,
+        "x": 1190,
+        "y": 460,
         "wires": [
             [
                 "09d8d916d402648e"
@@ -943,15 +826,15 @@
         "id": "09d8d916d402648e",
         "type": "rpi-gpio out",
         "z": "945820fc.c8cba",
-        "name": "",
+        "name": "relay 1 power supply motor",
         "pin": "5",
         "set": "",
         "level": "0",
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 1380,
-        "y": 420,
+        "x": 1480,
+        "y": 460,
         "wires": []
     },
     {
@@ -990,7 +873,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 360,
-        "y": 160,
+        "y": 100,
         "wires": []
     },
     {
@@ -999,7 +882,7 @@
         "z": "945820fc.c8cba",
         "name": "temperature-chart",
         "group": "44754402.e37c1c",
-        "order": 3,
+        "order": 2,
         "width": 0,
         "height": 0,
         "label": "temperature-chart",
@@ -1036,5 +919,693 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "8835ccc6b1dac121",
+        "type": "inject",
+        "z": "945820fc.c8cba",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 600,
+        "wires": [
+            [
+                "a6647e529dce3a27",
+                "6eb6a045d9cb3fae"
+            ]
+        ]
+    },
+    {
+        "id": "a6647e529dce3a27",
+        "type": "function",
+        "z": "945820fc.c8cba",
+        "name": "door timer",
+        "func": "function isBetween(timestamp) {\n  const date = new Date(timestamp);\n  const hours = date.getHours();\n\n  var openDoor = global.get(\"openDoor\");\n  var closeDoor = global.get(\"closeDoor\");\n\n  return hours >= openDoor && hours < closeDoor;\n}\n\nvar currentTimestamp = msg.payload\nvar result = isBetween(currentTimestamp);\n\nif (result) {\n  msg.payload = true\n} else {\n  msg.payload = false\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 600,
+        "wires": [
+            [
+                "e81bdfb4.81ade"
+            ]
+        ]
+    },
+    {
+        "id": "adce54fd2943c746",
+        "type": "ui_numeric",
+        "z": "945820fc.c8cba",
+        "name": "",
+        "label": "Time to open",
+        "tooltip": "",
+        "group": "284c6a43.d3dc96",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "12",
+        "step": 1,
+        "className": "",
+        "x": 350,
+        "y": 1020,
+        "wires": [
+            [
+                "c39bbd25f6685205"
+            ]
+        ]
+    },
+    {
+        "id": "fd9f83d13cca1630",
+        "type": "ui_numeric",
+        "z": "945820fc.c8cba",
+        "name": "",
+        "label": "Time to close ",
+        "tooltip": "",
+        "group": "284c6a43.d3dc96",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}}",
+        "min": "12",
+        "max": "24",
+        "step": 1,
+        "className": "",
+        "x": 350,
+        "y": 1060,
+        "wires": [
+            [
+                "6371a1996933a76e"
+            ]
+        ]
+    },
+    {
+        "id": "6371a1996933a76e",
+        "type": "change",
+        "z": "945820fc.c8cba",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "closeDoor",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 1060,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c39bbd25f6685205",
+        "type": "change",
+        "z": "945820fc.c8cba",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "openDoor",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 1020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "02569aceb3b797d5",
+        "type": "inject",
+        "z": "945820fc.c8cba",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "7",
+        "payloadType": "num",
+        "x": 130,
+        "y": 1020,
+        "wires": [
+            [
+                "adce54fd2943c746"
+            ]
+        ]
+    },
+    {
+        "id": "74ac1f5ce3c0af1e",
+        "type": "inject",
+        "z": "945820fc.c8cba",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "20",
+        "payloadType": "num",
+        "x": 130,
+        "y": 1060,
+        "wires": [
+            [
+                "fd9f83d13cca1630"
+            ]
+        ]
+    },
+    {
+        "id": "8485b054b7aa8d10",
+        "type": "comment",
+        "z": "945820fc.c8cba",
+        "name": "switch power supply on/off",
+        "info": "",
+        "x": 1230,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "c18249284c052f61",
+        "type": "comment",
+        "z": "945820fc.c8cba",
+        "name": "Door Settings",
+        "info": "",
+        "x": 130,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "1ef6cc55daf44ffb",
+        "type": "rbe",
+        "z": "945820fc.c8cba",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 1010,
+        "y": 600,
+        "wires": [
+            [
+                "c1cee7320295ef00",
+                "e61c534511c171fb"
+            ]
+        ]
+    },
+    {
+        "id": "23ba2e74d547d827",
+        "type": "rpi-gpio out",
+        "z": "945820fc.c8cba",
+        "name": "Relay Red Light",
+        "pin": "13",
+        "set": "",
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 980,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "ef302983109b66f0",
+        "type": "comment",
+        "z": "945820fc.c8cba",
+        "name": "relay 1 = BCM 5",
+        "info": "",
+        "x": 1160,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "b6c87f6cb71aebb1",
+        "type": "comment",
+        "z": "945820fc.c8cba",
+        "name": "relay 2 = BCM 6",
+        "info": "",
+        "x": 1160,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "61bcee8b7f6cf6bf",
+        "type": "comment",
+        "z": "945820fc.c8cba",
+        "name": "relay 3 = BCM 13",
+        "info": "",
+        "x": 1160,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "1d66967649e25782",
+        "type": "comment",
+        "z": "945820fc.c8cba",
+        "name": "relay 4 = BCM 16",
+        "info": "",
+        "x": 1160,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "84b871346f75d6c2",
+        "type": "comment",
+        "z": "945820fc.c8cba",
+        "name": "relay 5 = BCM 19",
+        "info": "",
+        "x": 1160,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "a387d508b91712bd",
+        "type": "comment",
+        "z": "945820fc.c8cba",
+        "name": "relay 6 = BCM 20",
+        "info": "",
+        "x": 1160,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "77febb2c31119956",
+        "type": "comment",
+        "z": "945820fc.c8cba",
+        "name": "relay 7 = BCM 21",
+        "info": "",
+        "x": 1160,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "f51a0cad9f709604",
+        "type": "comment",
+        "z": "945820fc.c8cba",
+        "name": "relay 8 = BCM 26",
+        "info": "",
+        "x": 1160,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "1b9acd95977bfac2",
+        "type": "rpi-gpio out",
+        "z": "945820fc.c8cba",
+        "name": "Relay Normal Light",
+        "pin": "6",
+        "set": "",
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 1450,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "6eb6a045d9cb3fae",
+        "type": "function",
+        "z": "945820fc.c8cba",
+        "name": "light timer",
+        "func": "function isBetween(timestamp) {\n  const date = new Date(timestamp);\n  const hours = date.getHours();\n\n  var lightOn = global.get(\"openDoor\")-1;\n  var lightOff = global.get(\"openDoor\");\n\n  return hours >= lightOn && hours < lightOff;\n}\n\nvar currentTimestamp = msg.payload\nvar result = isBetween(currentTimestamp);\n\nif (result) {\n  msg.payload = true\n} else {\n  msg.payload = false\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 760,
+        "wires": [
+            [
+                "e6d775a2116c4ffc"
+            ]
+        ]
+    },
+    {
+        "id": "dda44b539c3d9d74",
+        "type": "ui_switch",
+        "z": "945820fc.c8cba",
+        "name": "Light manually",
+        "label": "On/Off normal Light",
+        "tooltip": "",
+        "group": "d973baea5b094391",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": true,
+        "className": "",
+        "x": 840,
+        "y": 760,
+        "wires": [
+            [
+                "1f2eb4a1936a8c16"
+            ]
+        ]
+    },
+    {
+        "id": "e6d775a2116c4ffc",
+        "type": "switch",
+        "z": "945820fc.c8cba",
+        "name": "automatic switch based routing",
+        "property": "automatic",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 590,
+        "y": 760,
+        "wires": [
+            [
+                "dda44b539c3d9d74"
+            ]
+        ]
+    },
+    {
+        "id": "1f2eb4a1936a8c16",
+        "type": "rbe",
+        "z": "945820fc.c8cba",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 1010,
+        "y": 760,
+        "wires": [
+            [
+                "9ff5cd9ca3b15574"
+            ]
+        ]
+    },
+    {
+        "id": "9ff5cd9ca3b15574",
+        "type": "change",
+        "z": "945820fc.c8cba",
+        "name": "invert bool",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "false",
+                "fromt": "bool",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1190,
+        "y": 760,
+        "wires": [
+            [
+                "1b9acd95977bfac2",
+                "35cf874285851cdd"
+            ]
+        ]
+    },
+    {
+        "id": "35cf874285851cdd",
+        "type": "function",
+        "z": "945820fc.c8cba",
+        "name": "set text inject",
+        "func": "var payload=msg.payload;\n\n\nif (payload == true){\n    msg.payload = \"Off\"\n    \n}\n\nif (payload == false){\n    msg.payload = \"On\"\n    \n}    \n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1190,
+        "y": 820,
+        "wires": [
+            [
+                "a57d853e0c916581"
+            ]
+        ]
+    },
+    {
+        "id": "a57d853e0c916581",
+        "type": "ui_text",
+        "z": "945820fc.c8cba",
+        "group": "d973baea5b094391",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Status Light",
+        "label": "Normal Light status:",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1430,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "696dcebc855e69eb",
+        "type": "function",
+        "z": "945820fc.c8cba",
+        "name": "heater function ",
+        "func": "var temp = parseInt(msg.payload);\n\nif (temp <= -1){\nmsg.payload = true\n}\nif (temp >= 2) {\n    msg.payload = false\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 340,
+        "wires": [
+            [
+                "707b8b53d3c533e6"
+            ]
+        ]
+    },
+    {
+        "id": "7a9b719a026f363b",
+        "type": "ui_text",
+        "z": "945820fc.c8cba",
+        "group": "d973baea5b094391",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "Status Red Light",
+        "label": "Red Light status:",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 990,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "9207a7193b0a1c6f",
+        "type": "function",
+        "z": "945820fc.c8cba",
+        "name": "set text inject",
+        "func": "var payload=msg.payload;\n\nif (payload == true){\n    msg.payload = \"Off\"\n    \n}\n\nif (payload == false){\n    msg.payload = \"On\"\n    \n}    \n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 420,
+        "wires": [
+            [
+                "7a9b719a026f363b"
+            ]
+        ]
+    },
+    {
+        "id": "707b8b53d3c533e6",
+        "type": "ui_switch",
+        "z": "945820fc.c8cba",
+        "name": "Red Light manually",
+        "label": "On/Off Red Light",
+        "tooltip": "",
+        "group": "d973baea5b094391",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": true,
+        "className": "",
+        "x": 470,
+        "y": 340,
+        "wires": [
+            [
+                "2e2c37554dd7709c"
+            ]
+        ]
+    },
+    {
+        "id": "2e2c37554dd7709c",
+        "type": "rbe",
+        "z": "945820fc.c8cba",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 630,
+        "y": 340,
+        "wires": [
+            [
+                "383570884d076047"
+            ]
+        ]
+    },
+    {
+        "id": "383570884d076047",
+        "type": "function",
+        "z": "945820fc.c8cba",
+        "name": "invert bool",
+        "func": "if (msg.payload == true){\n    msg.payload = false;\n    return msg;\n}\n\nif (msg.payload == false) {\n    msg.payload = true;\n    return msg;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 340,
+        "wires": [
+            [
+                "23ba2e74d547d827",
+                "9207a7193b0a1c6f"
+            ]
+        ]
+    },
+    {
+        "id": "4ad6c3879850fcb9",
+        "type": "comment",
+        "z": "945820fc.c8cba",
+        "name": "Relay Board (B) pinout",
+        "info": "",
+        "x": 1180,
+        "y": 900,
+        "wires": []
     }
 ]
